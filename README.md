@@ -11,6 +11,6 @@ rota `/maria`
 controller (maria, João)
 
 service: 
-João -> banco -> 12 anos -> erro
+João -> banco -> 12 anos -> erro <br/>
 João -> banco -> 18 anos -> maria
 
