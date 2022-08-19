@@ -23,7 +23,7 @@ class AuthenticateUserService {
       throw new AppError('Incorrect username/password combination.', 401);
     }
 
-    const token = jwt.sign({ username: user.username, userId: user.id }, '996359072');
+    const token = jwt.sign({ sub: user.id }, '996359072');
 
     delete user.password;
 
