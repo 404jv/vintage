@@ -1,6 +1,7 @@
 import { Message } from "@prisma/client";
 import { prisma } from "../database";
 import { AppError } from "../error/AppError";
+import { io } from '../app';
 
 class SendMessageService {
   async execute(text: string, userId: string): Promise<Message> {
@@ -18,8 +19,15 @@ class SendMessageService {
       data: {
         text,
         userId
+      },
+      include: {
+        user: true,
       }
     });
+
+    delete message.user.password;
+
+    io.emit('new_message', message);
 
     return message;
   }
