@@ -4,8 +4,10 @@ import { AppError } from './error/AppError';
 import { routes } from './routes';
 import http from 'node:http';
 import { Server } from 'socket.io';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 
 const serverHttp = http.createServer(app);
 
