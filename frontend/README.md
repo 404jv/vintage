@@ -1,0 +1,1 @@
+deixar os inputs sem o requerid e fazer uma validação mais antiga
