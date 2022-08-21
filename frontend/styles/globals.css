@@ -8,6 +8,22 @@ body {
   box-sizing: border-box;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+textarea {
+  resize: none;
+  border: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
 h1 {
   font-size: 1.5rem;
   margin-bottom: 2rem;
