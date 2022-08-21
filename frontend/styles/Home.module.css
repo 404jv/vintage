@@ -97,7 +97,15 @@
 
 @media only screen and (max-width: 600px) {
   .container {
-    height: 60vh;
-    margin: 15% 0 0 0;
+    height: 95vh;
+    margin: 4px;
+
+    grid-template-rows: 1fr 12fr 1fr;
+
+    grid-template-areas:
+      "users chat"
+      "users chat"
+      "users messages";
+    ;
   }
 }
