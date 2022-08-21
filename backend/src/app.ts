@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
 
     usersOnlineInMemory.add(user);
 
-    io.emit('new_user_online', user);
+    io.emit('new_user_online', usersOnlineInMemory.getUsers());
   });
 
   socket.on('disconnect', () => {
