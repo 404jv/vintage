@@ -1,7 +1,6 @@
 import Router from "next/router";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
-import { socket } from "../services/socket";
 
 type User = {
   id: string;

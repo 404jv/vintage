@@ -3,6 +3,7 @@ import { AuthContext } from '../contexts/auth';
 import { api } from '../services/api';
 import { socket } from '../services/socket';
 import styles from '../styles/Home.module.css';
+import { playSongNewMessage } from '../utils/playSongs';
 
 type Message = {
   id: string;
@@ -21,7 +22,10 @@ export function Chat() {
   const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   socket.on('new_message', (newMessage: Message) => {
-    setMessages([...messages, newMessage]);
+    if (userLogged?.id !== newMessage.user.id) {
+      setMessages([newMessage, ...messages]);
+      playSongNewMessage();
+    }
   });
 
   async function handleSendMessage() {
@@ -34,7 +38,7 @@ export function Chat() {
         text: messageToSend,
       });
 
-      setMessages([...messages, response.data]);
+      setMessages([response.data, ...messages]);
       setMessageToSend('');
     } catch (error) {
       console.log(error);
@@ -45,7 +49,7 @@ export function Chat() {
 
   useEffect(() => {
     api.get('/messages').then((response) => {
-      setMessages(response.data.reverse());
+      setMessages(response.data);
     });
   }, []);
 
