@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Head from 'next/head';
 import { useContext } from 'react';
 import { Chat } from '../components/Chat';
 import { UsersOnline } from '../components/UsersOnline';
