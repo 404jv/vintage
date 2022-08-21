@@ -38,6 +38,8 @@ export function AuthProvider(props: AuthProvider) {
 
       localStorage.setItem('@vintage:token', token);
       api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      localStorage.setItem('@vintage:user', JSON.stringify(user));
       setUser(user);
 
       alert('Login realizado com sucesso!');
@@ -58,6 +60,19 @@ export function AuthProvider(props: AuthProvider) {
     setUser(null);
     localStorage.removeItem('@vintage:token');
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('@vintage:token');
+    const user = localStorage.getItem('@vintage:user');
+
+    if (token && user) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+      setUser(JSON.parse(user));
+      return;
+    }
+
+    Router.push('/Login');
+  }, []);
 
   return (
     <AuthContext.Provider value={{ signOut, signIn, user }}>
