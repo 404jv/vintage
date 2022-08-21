@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Router from "next/router";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/auth";
 
