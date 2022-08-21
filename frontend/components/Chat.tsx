@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/auth';
 import { api } from '../services/api';
+import { socket } from '../services/socket';
 import styles from '../styles/Home.module.css';
 
 type Message = {
@@ -18,6 +19,10 @@ export function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageToSend, setMessageToSend] = useState('');
   const [isSendingMessage, setIsSendingMessage] = useState(false);
+
+  socket.on('new_message', (newMessage: Message) => {
+    setMessages([...messages, newMessage]);
+  });
 
   async function handleSendMessage() {
     if (!messageToSend.trim()) return;
