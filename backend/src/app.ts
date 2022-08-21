@@ -27,12 +27,12 @@ io.on('connection', (socket) => {
     });
 
     usersOnlineInMemory.add(user);
-
-    io.emit('new_user_online', usersOnlineInMemory.getUsers());
+    io.emit('users_online', usersOnlineInMemory.getUsers());
   });
 
   socket.on('disconnect', () => {
     usersOnlineInMemory.remove(socket.id);
+    io.emit('users_online', usersOnlineInMemory.getUsers());
   });
 });
 
