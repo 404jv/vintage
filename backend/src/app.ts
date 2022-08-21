@@ -5,6 +5,7 @@ import { routes } from './routes';
 import http from 'node:http';
 import { Server } from 'socket.io';
 import cors from 'cors';
+import { UsersOnlineInMemory } from './database/UsersOnlineInMemory';
 
 const app = express();
 app.use(cors());
@@ -17,8 +18,22 @@ const io = new Server(serverHttp, {
   }
 });
 
+const usersOnlineInMemory = new UsersOnlineInMemory();
+
 io.on('connection', (socket) => {
-  console.log(`📲 User is connected on socket ${socket.id}`);
+  socket.on('connection', (user: any) => {
+    Object.assign(user, {
+      socketId: socket.id,
+    });
+
+    usersOnlineInMemory.add(user);
+
+    io.emit('new_user_online', user);
+  });
+
+  socket.on('disconnect', () => {
+    usersOnlineInMemory.remove(socket.id);
+  });
 });
 
 app.use(express.json());
