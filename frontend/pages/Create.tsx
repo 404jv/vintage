@@ -23,6 +23,9 @@ const Create: React.FC = () => {
     } catch (error: any) {
       const message = error.response.data.message;
 
+      console.log(message);
+      console.log(error.response);
+
       if (message === 'password must be equal to confirm password') {
         alert('A senha precisa ser igual a confirmação de senha');
         return;
