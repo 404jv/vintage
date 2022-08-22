@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+console.log(process.env.BASE_URL);
+
 export const api = axios.create({
-  baseURL: 'https://vintage-backend.herokuapp.com',
+  baseURL: process.env.BASE_URL || 'http://localhost:3000',
 });

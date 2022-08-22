@@ -1,7 +1,5 @@
 import io from 'socket.io-client';
 
-const socket = io('https://vintage-backend.herokuapp.com/');
-
-console.log(process.env.BASE_URL);
+const socket = io(process.env.BASE_URL || 'http://localhost:3000');
 
 export { socket };
